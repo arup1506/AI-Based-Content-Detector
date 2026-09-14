@@ -23,14 +23,16 @@ import streamlit as st
 try:
     from src.extractors import extract_from_file, extract_from_url, clean_text
     from src.model import AIDetector, MODEL_PATH
-except ModuleNotFoundError as e:
-    st.error(
-        f"⚠️ **Module Import Error**: `{e}`\n\n"
-        "If you are deploying on **Streamlit Cloud**, please ensure:\n"
-        "1. The **`src/`** folder (containing `extractors.py`, `features.py`, `model.py`) was pushed/uploaded to your GitHub repository.\n"
-        "2. The **`requirements.txt`** file is in the root directory of your GitHub repository so Streamlit can install all dependencies."
-    )
-    st.stop()
+except ModuleNotFoundError:
+    try:
+        from extractors import extract_from_file, extract_from_url, clean_text
+        from model import AIDetector, MODEL_PATH
+    except ModuleNotFoundError as e:
+        st.error(
+            f"⚠️ **Module Import Error**: `{e}`\n\n"
+            "Please ensure that `extractors.py`, `features.py`, and `model.py` are present in your GitHub repository."
+        )
+        st.stop()
 
 # Page Configuration
 st.set_page_config(
@@ -186,15 +188,25 @@ def get_detector() -> AIDetector:
     """Load and cache the detection model."""
     detector = AIDetector(model_path=MODEL_PATH)
     if not detector.is_trained:
-        csv_file = os.path.join(ROOT_DIR, "data", "dataset.csv")
+        csv_candidates = [
+            os.path.join(ROOT_DIR, "data", "dataset.csv"),
+            os.path.join(ROOT_DIR, "dataset.csv")
+        ]
+        csv_file = next((p for p in csv_candidates if os.path.exists(p)), csv_candidates[0])
         if not os.path.exists(csv_file):
             try:
-                from data.generate_dataset import save_dataset
+                try:
+                    from data.generate_dataset import save_dataset
+                except ModuleNotFoundError:
+                    from generate_dataset import save_dataset
                 save_dataset(csv_file)
             except Exception:
                 pass
-        from train import train_and_evaluate
-        train_and_evaluate()
+        try:
+            from train import train_and_evaluate
+            train_and_evaluate()
+        except Exception:
+            pass
         detector = AIDetector(model_path=MODEL_PATH)
     return detector
 
