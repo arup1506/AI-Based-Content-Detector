@@ -1,34 +1,32 @@
-# 🛡️ AI Content Detector (AI vs. Human Text)
+-- AI Content Detector (AI vs Human Text) --
 
 An AI-generated text detection application that analyzes content from:
-1. 📝 **Direct Text Input** (Copy/Paste with instant sample loaders)
-2. 📁 **Document Files** (PDF `.pdf`, Word `.docx`, Plain text `.txt`, `.md`, `.rtf`)
-3. 🔗 **Article & Blog URLs** (Automatic web scraper extracting clean article body)
+1.Direct Text Input (Copy/Paste with instant sample loaders)
+2. Document Files (PDF, Word, Plain text, .md, .rtf)
+3.Article & Blog URLs (Automatic web scraper extracting clean article body)
 
-Outputs comprehensive **AI % vs. Human %** distributions, overall verdict, confidence rating, sentence-by-sentence visual heatmaps, and stylometric diagnostics (burstiness, lexical diversity, readability).
+Outputs: AI percentage and Human percentage distributions, overall verdict,confidence rating, sentence-by-sentence visual heatmaps and stylometric diagnostics (burstiness, lexical diversity, readability).
 
----
+--Key Features
 
-## 🌟 Key Features
+Percentage Breakdown:
+Exact probability calculation (e.g. 85.2% AI-Generated, 14.8% Human-Authored).
+Multi-Document Upload: Fast parser for pdf (using `pypdf`),docx (using `python-docx` + zero-dependency XML fallback) and text files.
 
-- **Percentage Breakdown**: Exact probability calculation (e.g., `85.2% AI-Generated, 14.8% Human-Authored`).
-- **Multi-Document Upload**: Fast parser for `.pdf` (using `pypdf`), `.docx` (using `python-docx` + zero-dependency XML fallback), and text files.
-- **Article & Blog URL Scraper**: Extracts clean editorial text while eliminating ads, navigation, headers, and footers.
-- **Sentence-Level AI Heatmap**: Color-codes every sentence in the document based on individual model predictability:
-  - 🔴 **Red**: Likely AI-Generated (> 65%)
-  - 🟡 **Yellow**: Mixed / Uncertain (38% - 65%)
-  - 🟢 **Green**: Likely Human-Authored (< 38%)
-- **Stylometric & Linguistic Diagnostics**:
-  - **Burstiness (CV)**: Measures sentence length variation and cadence.
-  - **Lexical Diversity (TTR)**: Type-Token Ratio and unique word counts.
-  - **Readability**: Flesch Reading Ease score and grade level.
-  - **Formulaic LLM Marker Detection**: Identifies over-indexed transition phrases.
-- **Minimizes False Positives**: Incorporates academic calibration to protect human writers.
-- **Exportable Reports**: One-click download of JSON analysis reports.
+Article & Blog URL Scraper: Extracts clean editorial text while eliminating ads, navigation, header and footers.
+Sentence-Level AI Heatmap: Color-codes every sentence in the document based on individual model predictability:
+🔴 Red: Likely AI-Generated(> 65%)
+🟡 Yellow: Mixed/Uncertain(38%-65%)
+🟢 Green:Likely Human-Authored(<38%)
+Stylometric & Linguistic Diagnostics:
+ Burstiness (CV): Measures sentence length variation and cadence.
+Lexical Diversity (TTR): Type-Token Ratio and unique word counts.
+Readability: Flesch Reading Ease score and grade level.
+Formulaic LLM Marker Detection: Identifies over-indexed transition phrases.
+Minimizes False Positives: Incorporates academic calibration to protect human writers.
+Exportable Reports: One-click download of JSON analysis reports.
 
----
-
-## 📂 Project Structure
+##Project Structure
 
 ```
 project ABCD/
