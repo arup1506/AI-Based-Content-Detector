@@ -36,7 +36,7 @@ except ModuleNotFoundError:
 
 # Page Configuration
 st.set_page_config(
-    page_title="SPARK",
+    page_title="AI CONTENT DETECTOR",
     page_icon="🛡️",
     layout="wide",
     initial_sidebar_state="collapsed"
