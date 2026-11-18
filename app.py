@@ -36,7 +36,7 @@ except ModuleNotFoundError:
 
 # Page Configuration
 st.set_page_config(
-    page_title="AI Content Detector - AI vs Human",
+    page_title="SPARK",
     page_icon="🛡️",
     layout="wide",
     initial_sidebar_state="collapsed"
@@ -216,9 +216,9 @@ detector = get_detector()
 # Header
 st.markdown("""
 <div class="main-header">
-    <div class="main-title">AI Content Detector</div>
+    <div class="main-title">SPARK</div>
     <div class="main-subtitle">
-        Deep linguistic & machine learning inspection to distinguish human-authored writing from AI models (ChatGPT, Claude, Gemini).
+        Smart Platform for AI Recognition and Knowledge
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -285,9 +285,9 @@ with tab_text:
     
     words = len(raw_text.split()) if raw_text else 0
     chars = len(raw_text) if raw_text else 0
-    st.caption(f"Word count: **{words}** | Character count: **{chars}** (Recommended: 80+ words)")
+    st.caption(f"Word count: **{words}** | Character count: **{chars}** ")
     
-    if st.button("🚀 Analyze Pasted Text", type="primary", use_container_width=True):
+    if st.button("Analyze", type="primary", use_container_width=True):
         if words < 15:
             st.error("Please provide at least 15 words for meaningful detection.")
         else:
